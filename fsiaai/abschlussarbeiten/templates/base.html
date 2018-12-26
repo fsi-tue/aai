@@ -38,6 +38,9 @@
         <li class="nav-item {% block all_active %}{% endblock %}">
         <a class="nav-link" href="{% url 'all' %}">Alle Abschlussarbeiten</a>
         </li>
+        <li class="nav-item {% block tags_active %}{% endblock %}">
+        <a class="nav-link" href="{% url 'tags' %}">Schlagwörter</a>
+        </li>
         {% if request.user.is_staff %}
         <li class="nav-item">
         <a class="nav-link" href="{% url 'admin:index' %}">Administration</a>

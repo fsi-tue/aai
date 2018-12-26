@@ -1,8 +1,11 @@
+import tagulous.models
 from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
 from django.utils import timezone
+from tagulous.utils import parse_tags
 
 
 class Chair(models.Model):
@@ -68,6 +71,10 @@ class Thesis(models.Model):
                             max_length=3,
                             choices=THESIS_CHOICES,
                             blank=False)
+
+    tags = tagulous.models.TagField(get_absolute_url=lambda tag: reverse(
+            'by_tag',
+            args=parse_tags(tag.slug)))
 
     def __str__(self):
         return self.title

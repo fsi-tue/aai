@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block tags_active %}active{% endblock %}
+{% block content %}
+    <h2>Tags</h2>
+{% if tags %}
+    <p>
+    {% for tag in tags %}
+        {# tags are weighted by 1 to 6, so we can define CSS classes tag_<1-6> to style them #}
+        <a href="{{ tag.get_absolute_url }}" class="tag_{{ tag.weight }}">
+            {{ tag.name }}
+        </a>
+    {% endfor %}
+{% endif %}
+{% endblock %}
