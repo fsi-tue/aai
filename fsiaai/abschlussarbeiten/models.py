@@ -8,6 +8,13 @@ from django.utils import timezone
 class Chair(models.Model):
     name = models.CharField('Lehrstuhl-name', max_length=100)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Lehrstuhl"
+        verbose_name_plural = "Lehrstühle"
+
 
 class Thesis(models.Model):
     """
@@ -51,9 +58,9 @@ class Thesis(models.Model):
                               related_name="provided_by",
                               verbose_name='angeboten durch Lehrstuhl')
 
-    start_date = models.DateTimeField('frühester Beginn',
-                                      blank=False,
-                                      default=timezone.now)
+    start_date = models.DateField('frühester Beginn',
+                                  blank=False,
+                                  default=timezone.now)
 
     is_active = models.BooleanField('aktiv',
                                     default=True)
@@ -62,7 +69,14 @@ class Thesis(models.Model):
                            upload_to='uploads/',
                            blank=True)
 
-    type = models.CharField(max_length=3,
+    type = models.CharField(max_length=7,
                             choices=THESIS_CHOICES,
                             blank=False)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Abschlussarbeit"
+        verbose_name_plural = "Abschlussarbeiten"
 

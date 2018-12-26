@@ -1,16 +1,21 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
+from .models import Thesis
+from .tables import ThesisTable
+from django.forms.utils import flatatt
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'index.html')
 
 
-def detail(request):
-    return HttpResponse("Hello, world. This is the detail page.")
+def detail(request, thesis_id):
+    response = "You're looking at the detail page of thesis %s."
+    return HttpResponse(response % thesis_id)
 
 
 def allentries(request):
-    return HttpResponse("Hello, world. This page will show all entries.")
+    entries = ThesisTable(Thesis.objects.filter(is_active=True))
+    return render(request, 'all.html', {
+        'allentries': entries
+    })
