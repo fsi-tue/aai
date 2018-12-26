@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Detailansicht</h2>
+    <div class="container">
+    <h4>{{ thesis.title }}</h4>
+    <h5>Lehrstuhl: {{ thesis.chair }}</h5>
+  <div class="col-8">
+      <div class="row"><p>Beschreibung:</p> <br /> {{ thesis.description }}</div>
+      {% if thesis.additional %}
+      <div class="row"><p>weitere Informationen:</p>{{ thesis.additional }}</div>
+      {% endif %}
+      <div class="row"><p>frühester Beginn:</p>{{ thesis.start_date }}</div>
+      <div class="row"><p>Beschreibung:</p>Bööh</div>
+  </div>
+
+    <a href="/uploads/{{ thesis.pdf }}"><button class="btn btn-success btn-large"><i class="fas-download"></i>Download PDF</button></a>
+    <a href="mailto:{{ thesis.contact }}?subject=Abschlussarbeit {{ thesis.title }}"><button class="btn btn-primary btn-large"><i class="fas-download"></i>E-Mail an Ansprechpartner</button></a>
+
+</div>
 {% endblock %}

@@ -64,7 +64,6 @@ class Thesis(models.Model):
                                     default=True)
 
     pdf = models.FileField('PDF mit Ausschreibung',
-                           upload_to='uploads/',
                            blank=True)
 
     type = models.CharField('Art der Arbeit',

@@ -3,7 +3,9 @@ from django.http import request
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
+
 from .models import Chair, Thesis
+from .filters import ThesisFilter
 from django_tables2.utils import A
 
 """
@@ -28,4 +30,5 @@ class ThesisTable(tables.Table):
 
     def render_link(self, record):
         return mark_safe('<a href=' + reverse('detail', args=[record.pk]) + '>Details</a>')
+
 

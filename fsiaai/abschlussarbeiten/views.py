@@ -1,17 +1,25 @@
+import os
+
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Thesis
 from .tables import ThesisTable
-from django.forms.utils import flatatt
+from django_filters.views import FilterView
+from django_tables2 import SingleTableMixin
+from .filters import ThesisFilter
 
 
 def index(request):
+    messages.info(request, 'Diese Seite befindet sich noch im Aufbau und ist sowieso nur Proof of Concept.')
     return render(request, 'index.html')
 
 
 def detail(request, thesis_id):
-    response = "You're looking at the detail page of thesis %s."
-    return HttpResponse(response % thesis_id)
+    thesis = get_object_or_404(Thesis, pk=thesis_id)
+    return render(request, 'detail.html', {
+        'thesis': thesis,
+    })
 
 
 def allentries(request):
@@ -44,3 +52,12 @@ def by_tag(request, slug):
         'tag': tag,
         'with_tag': thesis_with_tag
     })
+
+
+class FilteredThesisView(SingleTableMixin, FilterView):
+    table_class = ThesisTable
+    model = Thesis
+    template_name = 'search.html'
+
+    filterset_class = ThesisFilter
+    table = ThesisTable
