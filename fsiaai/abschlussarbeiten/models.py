@@ -23,17 +23,12 @@ class Thesis(models.Model):
     A thesis can be promoted for either BSc, MSc, BEd, MEd, or as being part of a project.
     Each thesis is referenced with the chair that is providing it via a ForeignKey field.
     """
-    BSC = 'B.Sc.'
-    MSC = 'M.Sc.'
-    BED = 'B.Ed.'
-    MED = 'M.Ed.'
-    PRO = 'Project'
     THESIS_CHOICES = (
-        (BSC, 'Bachelor of Science'),
-        (MSC, 'Master of Science'),
-        (BED, 'Bachelor of Education'),
-        (MED, 'Master of Education'),
-        (PRO, 'Forschungsprojekt'),
+        ('BSC', 'Bachelor of Science'),
+        ('MSC', 'Master of Science'),
+        ('BED', 'Bachelor of Education'),
+        ('MED', 'Master of Education'),
+        ('PRO', 'Forschungsprojekt'),
     )
 
     title = models.CharField('Titel der Arbeit',
@@ -69,7 +64,8 @@ class Thesis(models.Model):
                            upload_to='uploads/',
                            blank=True)
 
-    type = models.CharField(max_length=7,
+    type = models.CharField('Art der Arbeit',
+                            max_length=3,
                             choices=THESIS_CHOICES,
                             blank=False)
 
