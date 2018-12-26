@@ -22,7 +22,7 @@ class ThesisTable(tables.Table):
     class Meta:
         model = Thesis
         attrs = {'class': 'table table-responsive thesis'}  # renders css class
-        exclude = ['thesis_id', 'contact', 'is_active', 'pdf']
+        exclude = ['id', 'contact', 'additional', 'is_active', 'pdf']
 
     link = tables.LinkColumn('detail', args=[A('pk')], orderable=False, empty_values=())
 
