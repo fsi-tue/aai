@@ -25,7 +25,7 @@ class Command(BaseCommand):
         ]
         perms_moderatoren = [
             # Permission.objects.get(codename='is_staff'),
-            Permission.objects.get(codename='add_aaisuser'),
+            Permission.objects.get(codename='add_aaiuser'),
             Permission.objects.get(codename='change_aaiuser'),
             Permission.objects.get(codename='delete_aaiuser'),
             Permission.objects.get(codename='add_thesis'),

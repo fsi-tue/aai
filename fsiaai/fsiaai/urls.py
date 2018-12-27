@@ -18,7 +18,6 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from . import settings
-app_name = 'fsiaai'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

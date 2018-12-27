@@ -36,7 +36,8 @@ class Command(BaseCommand):
             'Medieninformatik/Visual Computing': 'Schilling',
             'Perception Engineering': 'Kasneci',
             'Neuronale Informationsverarbeitung': 'Wichmann',
-            'Computergrafik': 'Lensch'
+            'Computergrafik': 'Lensch',
+            'nicht zugeordnet': 'N/A'
         }
         for key, value in chairs.items():
             Chair(name=key, head=value).save()

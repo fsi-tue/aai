@@ -105,3 +105,6 @@ venv.bak/
 
 # pyCharm
 .idea
+
+# Django migrations
+fsiaai/abschlussarbeiten/migrations/

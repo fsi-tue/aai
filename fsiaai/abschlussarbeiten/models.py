@@ -20,6 +20,41 @@ class Chair(models.Model):
         verbose_name_plural = "Lehrstühle"
 
 
+class AAIUser(AbstractUser):
+    """
+        A custom user object is needed to process the group attributes
+        that we receive through SAML2/Shibboleth.
+        """
+    chair = models.OneToOneField(Chair,
+                                 null=True,
+                                 on_delete=models.CASCADE,
+                                 related_name='employed_at',
+                                 verbose_name="Angestellt bei Lehrstuhl")
+
+    pass
+
+    def process_groups(self, groups):
+        """
+        This is called to process the 'eduPersonAffiliation' attribute
+        of the user authenticating with SAML.
+        If eduPersonAffiliation of a user contains 'employee', we add them
+        to our internal 'dozenten' group. Everything else is handed over to Django.
+
+        :param groups: list of groups the user belongs to
+        """
+        if 'employee' in groups:
+            dozenten = Group.objects.get(name='dozenten')
+            dozenten.user_set.add(self)
+            self.is_staff = True  # backend login
+        pass
+
+    def has_group(self, group):
+        """
+        handy way to check if our current user is member of a certain group.
+        """
+        return self.groups.filter(name__in=[group]).exists()
+
+
 class Thesis(models.Model):
     """
     This class defines the field that a thesis can have.
@@ -76,6 +111,11 @@ class Thesis(models.Model):
             'by_tag',
             args=parse_tags(tag.slug)))
 
+    user = models.ForeignKey(AAIUser, null=True,
+                             on_delete=models.DO_NOTHING,
+                             related_name="uploaded_by",
+                             verbose_name="hochgeladen von")
+
     def __str__(self):
         return self.title
 
@@ -85,4 +125,3 @@ class Thesis(models.Model):
     class Meta:
         verbose_name = "Abschlussarbeit"
         verbose_name_plural = "Abschlussarbeiten"
-
