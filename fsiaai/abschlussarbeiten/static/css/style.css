@@ -45,3 +45,13 @@ nav img {
   line-height: 50px; /* Vertically center the text there */
   background-color: #f5f5f5;
 }
+
+.details tr td:nth-child(odd) {
+    font-weight: bold;
+}
+
+
+.uibuttons {
+    margin-top: 20px;
+    font-size: 1.2em;
+}

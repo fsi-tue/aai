@@ -26,9 +26,6 @@ class ThesisTable(tables.Table):
         attrs = {'class': 'table table-responsive thesis'}  # renders css class
         exclude = ['id', 'contact', 'additional', 'is_active', 'pdf']
 
-    link = tables.LinkColumn('detail', args=[A('pk')], orderable=False, empty_values=())
-
-    def render_link(self, record):
-        return mark_safe('<a href=' + reverse('detail', args=[record.pk]) + '>Details</a>')
+    title = tables.Column(linkify=True)  # works since get_absolute_url() is defined for the Thesis model
 
 

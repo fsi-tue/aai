@@ -1,13 +1,13 @@
 import os
 
+from django.core.files.storage import FileSystemStorage
+from django_tables2 import RequestConfig
+from tagulous.utils import render_tags
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Thesis
 from .tables import ThesisTable
-from django_filters.views import FilterView
-from django_tables2 import SingleTableMixin
-from .filters import ThesisFilter
 
 
 def index(request):
@@ -24,6 +24,7 @@ def detail(request, thesis_id):
 
 def allentries(request):
     entries = ThesisTable(Thesis.objects.filter(is_active=True))
+    RequestConfig(request).configure(entries)  # for sorting
     return render(request, 'all.html', {
         'allentries': entries
     })
@@ -48,16 +49,8 @@ def by_tag(request, slug):
     """
     tag = slug
     thesis_with_tag = ThesisTable(Thesis.objects.filter(tags__slug=tag))
+    RequestConfig(request).configure(thesis_with_tag)  # for sorting
     return render(request, 'by_tag.html', {
         'tag': tag,
         'with_tag': thesis_with_tag
     })
-
-
-class FilteredThesisView(SingleTableMixin, FilterView):
-    table_class = ThesisTable
-    model = Thesis
-    template_name = 'search.html'
-
-    filterset_class = ThesisFilter
-    table = ThesisTable
