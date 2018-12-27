@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}{{ block.super }} - Login{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+{# <a href="{% url 'saml2_login' %}"><button type="button" class="btn btn-info">Login mit Shibboleth</button></a>  #}
+{% block content %}
+    <form action="{% url 'login' %}" method="post" accept-charset="utf-8">
+        <table id="loginform">
+        {% bootstrap_form form %}
+        {% csrf_token %}
+        </table>
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% bootstrap_button "Login" button_type="submit" button_class="btn-primary" %}
+    </form>
+{% endblock %}

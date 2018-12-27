@@ -1,0 +1,10 @@
+<!-- Login/Logout für überall -->
+<div id="toggle_login">
+{% if user.is_authenticated %}
+    Hallo {{ user.username }}! &nbsp;|&nbsp;
+    <a href="{% url 'password_change' %}"><button class="btn btn-primary btn-small">Passwort ändern</button></a> <a href="{% url 'logout' %}"><button class="btn btn-danger btn-small">Logout</button></a>
+{% else %}
+    {#  <p><i class="fa fa-sign-in" aria-hidden="true"></i><a href="{% url 'saml2_login' %}">Login mit Shibboleth</a>  #}
+    <a href="{% url 'login' %}"><button class="btn btn-success btn-small">Login mit lokalem Konto</button></a>
+{% endif %}
+</div>

@@ -9,10 +9,11 @@ from tagulous.utils import parse_tags
 
 
 class Chair(models.Model):
-    name = models.CharField('Lehrstuhl-name', max_length=100)
+    name = models.CharField('Lehrstuhl-Name', max_length=100, blank=False)
+    head = models.CharField('Leitung', max_length=50, default='')
 
     def __str__(self):
-        return self.name
+        return self.name+" ("+self.head+")"
 
     class Meta:
         verbose_name = "Lehrstuhl"
@@ -52,7 +53,7 @@ class Thesis(models.Model):
     contact = models.EmailField('E-Mail der Kontaktperson:',
                                 blank=False)
 
-    chair = models.ForeignKey(Chair, on_delete=models.DO_NOTHING,
+    chair = models.ForeignKey(Chair, on_delete=models.CASCADE,
                               related_name="provided_by",
                               verbose_name='angeboten durch Lehrstuhl')
 

@@ -15,15 +15,6 @@
 </head>
 <body>
 <div class="container">
-{% comment not needed for now %}
- <!-- login-toggle -->
-        {% block toggle_login %}
-            {% include 'toggle_login.html' %}
-        {% endblock %}
-<header class="page-header">
-    <h1 class="headertext"><a href="{% url 'home' %}">Abschlussarbeiten-Interface</a>&nbsp;{% block headertext %}2019{% endblock %}</h1>
-</header>
-{% endcomment %}
 
 {% block navigation %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -49,6 +40,10 @@
         </li>
         {% endif %}
     </ul>
+   <!-- login-toggle -->
+        {% block toggle_login %}
+            <p class="my-2 my-sm-0">{% include 'toggle_login.html' %}</p>
+        {% endblock %}
   </div>
 </nav>
 {% endblock %}
@@ -70,9 +65,9 @@
     {% endblock %}
 </div>
 </div> <!-- end wrapper -->
-<footer class="footer">
+<footer class="footer blue font-small">
       <div class="container">
-        <span class="text-muted">&copy; 2019 Tim Beckmann, Universität Tübingen</span>
+        <span class="text-muted credit">&copy; 2019 Tim Beckmann, Universität Tübingen</span>
       </div>
     </footer>
 </body>

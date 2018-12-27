@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from . import settings
 app_name = 'fsiaai'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(template_name='login.html'), name="login"),
+    path('logout/', LogoutView.as_view(), name="logout"),
+    path('change-pw/', PasswordChangeView.as_view(), name="password_change"),
     path('', include('abschlussarbeiten.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

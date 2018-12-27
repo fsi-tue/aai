@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Erfolgreich registriert{% endblock %}
+
+{% block content %}
+    Sie haben sich erfolgreich registriert. Ihr Account wird in den nächsten 24 Stunden
+    von einem der Administratoren entsprechend Ihrer Berechtigungen freigeschaltet.
+    <a href="{% url 'streammanager:index' %}">zur Stream-Übersicht</a>
+{% endblock %}

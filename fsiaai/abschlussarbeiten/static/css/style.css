@@ -1,6 +1,14 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
 
 nav img {
     height: 40px;
+}
+
+body {
+      margin-bottom: 80px;
 }
 
 .tag_1 {
@@ -24,6 +32,7 @@ nav img {
 
 .content {
     margin-top: 80px;
+    min-height: 100%;
 }
 
 .logo {
@@ -40,10 +49,10 @@ nav img {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 50px;
-  line-height: 50px; /* Vertically center the text there */
+  line-height: 50px;
   background-color: #f5f5f5;
+  overflow: hidden;
 }
 
 .details tr td:nth-child(odd) {

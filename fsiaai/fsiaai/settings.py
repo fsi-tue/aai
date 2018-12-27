@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_tables2',
     'tagulous',
+    'preview_generator',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'fsiaai.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['abschlussarbeiten/templates'],
+        'DIRS': ['fsiaai/templates', 'abschlussarbeiten/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

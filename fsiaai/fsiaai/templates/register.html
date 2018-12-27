@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block title %}{{ block.super }} - Registrieren{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+    {% bootstrap_form_errors form %}
+<form action="{% url 'register' %}" method="post" accept-charset="utf-8">
+    {% bootstrap_form form %}
+    {% csrf_token %}
+    {% bootstrap_button "Registrieren" button_type="submit" button_class="btn-primary" %}
+</form>
+{% endblock %}
