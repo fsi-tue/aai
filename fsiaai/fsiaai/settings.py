@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_tables2',
     'tagulous',
-    'preview_generator',
 ]
 
 MIDDLEWARE = [
