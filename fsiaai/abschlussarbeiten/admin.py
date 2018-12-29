@@ -13,14 +13,7 @@ admin.site.register(Chair)
 
 @admin.register(Thesis)
 class ThesisAdmin(ModelAdmin):
-    """
-    ForeignKey field.
-    If user is "mitarbeiter", only show Thesis of their own chair and enable them to only choose their own chair when creating one.
-    Maybe log which user created model entry with https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.save_model
-    """
-
     list_display = ('title', 'type', 'is_active', 'chair')
-
 
     @staticmethod
     def has_change_permission(request, obj=None):
@@ -38,21 +31,39 @@ class ThesisAdmin(ModelAdmin):
 
     @staticmethod
     def can_make_changes(thesis, request):
+        """
+        If a user is able to make changes to a model entry, they recieve the usual ModelForm.
+        If not, they get a read-only view of the entry.
+        :param thesis:
+        :param request:
+        :return:
+        """
         return thesis is None \
                or request.user.chair_id == thesis.chair.id \
                or request.user.id == thesis.user.id \
-               or request.user.is_superuser
+               or request.user.is_superuser \
+               or request.user.has_group('moderatoren')
 
     # def has_add_permission(self, request,obj=None):
     #     return True
-
+    """
     def get_queryset(self, request):
         queryset = super(ThesisAdmin, self).get_queryset(request)
         if request.user.is_superuser or request.user.has_group('moderatoren'):
             return queryset
         return queryset.filter(user=request.user)
+    """
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        """
+        We overload the formfield_for_foreignkey field to restrict users that are not superuser or moderators from:
+        * choosing other persons than themselves as uploaders of a Thesis
+        * choosing other chairs than their own as the chair providing a Thesi
+        :param db_field: referring to the Thesis model fields 'user' and 'chair'
+        :param request: contains the user that is logged in at the moment
+        :param kwargs: modified QuerySets are passed to the FormField inside the django admin via kwargs.
+        :return:
+        """
         if not request.user.is_superuser or request.user.has_group('moderatoren'):
             if db_field.name == 'user':
                 qs = AAIUser.objects.filter(username=request.user.username)
