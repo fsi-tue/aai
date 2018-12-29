@@ -1,5 +1,6 @@
 import tagulous.models
 from django.contrib.auth.models import AbstractUser, Group
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
 # Create your models here.
@@ -100,6 +101,7 @@ class Thesis(models.Model):
                                     default=True)
 
     pdf = models.FileField('PDF mit Ausschreibung',
+                           validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
                            blank=True)
 
     type = models.CharField('Art der Arbeit',
