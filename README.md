@@ -1,5 +1,5 @@
 # Abschlussarbeiten-Interface (WIP)
- https://img.shields.io/badge/django%20version-2.1-green.svg https://img.shields.io/badge/WIP-yes-red.svg https://img.shields.io/badge/awesome-hell%20yeah!-blue.svg
+ ![](https://img.shields.io/badge/django%20version-2.1-green.svg) ![](https://img.shields.io/badge/WIP-yes-red.svg) ![](https://img.shields.io/badge/awesome-hell%20yeah!-blue.svg)
 
 ## Info 
 Dieses Projekt (Work in Progress!) soll es Mitarbeitern einer Bildungseinrichtung ermöglichen, Ausschreibungen für Abschlussarbeiten
