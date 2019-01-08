@@ -42,9 +42,8 @@ def by_tag(request, slug):
     This view is called when a user highlights a specific tag inside the tagcloud view.
     The database is queried to show all Thesis with this tag, the QuerySet is then
     displayed inside a ThesisTable (see tables.py).
-    :param slug:
+    :param slug: the tag slug to be queried
     :param request: HTTP request object
-    :param args: the tag slug to be queried
     :return:
     """
     tag = slug

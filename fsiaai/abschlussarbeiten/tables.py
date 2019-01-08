@@ -16,6 +16,17 @@ The tables are then renderd in the template via the {% render_table table_name %
 """
 
 
+class TruncatedTextColumn(tables.Column):
+    """
+    This column truncates the output of a text column if it is longer than 202 characters.
+    If so, the first 199 characters are displayed, followed by an elipsis (...).
+    """
+    def render(self, value):
+        if len(value) > 202:
+            return value[0:199] + '...'
+        return str(value)
+
+
 class ThesisTable(tables.Table):
     """
     Displays a table for all the thesis that are currently available.
@@ -27,5 +38,5 @@ class ThesisTable(tables.Table):
         exclude = ['id', 'contact', 'additional', 'is_active', 'pdf']
 
     title = tables.Column(linkify=True)  # works since get_absolute_url() is defined for the Thesis model
-
+    description = TruncatedTextColumn(accessor=A('description'))
 
