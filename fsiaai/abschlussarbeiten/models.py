@@ -1,6 +1,7 @@
 import tagulous.models
 from django.contrib.auth.models import AbstractUser, Group
 from django.core.validators import FileExtensionValidator
+from multiselectfield import MultiSelectField
 from django.db import models
 
 # Create your models here.
@@ -69,6 +70,7 @@ class Thesis(models.Model):
         ('BED', 'Bachelor of Education'),
         ('MED', 'Master of Education'),
         ('PRO', 'Forschungsprojekt'),
+        ('ETC', 'nach Absprache')
     )
 
     title = models.CharField('Titel der Arbeit',
@@ -104,8 +106,7 @@ class Thesis(models.Model):
                            validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
                            blank=True)
 
-    type = models.CharField('Art der Arbeit',
-                            max_length=3,
+    type = MultiSelectField('Art der Arbeit',
                             choices=THESIS_CHOICES,
                             blank=False)
 

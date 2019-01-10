@@ -35,7 +35,7 @@ class ThesisTable(tables.Table):
     class Meta:
         model = Thesis
         attrs = {'class': 'table table-responsive thesis'}  # renders css class
-        exclude = ['id', 'contact', 'additional', 'is_active', 'pdf']
+        exclude = ['id', 'contact', 'additional', 'is_active', 'pdf', 'user']
 
     title = tables.Column(linkify=True)  # works since get_absolute_url() is defined for the Thesis model
     description = TruncatedTextColumn(accessor=A('description'))

@@ -4,3 +4,4 @@ django-bootstrap4
 djangosaml2>=0.17
 django-tagulous>=0.13.2
 django-filter
+django-multiselectfield

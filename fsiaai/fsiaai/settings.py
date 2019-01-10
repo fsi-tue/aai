@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_tables2',
     'tagulous',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [
