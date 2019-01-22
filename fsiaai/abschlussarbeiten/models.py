@@ -73,6 +73,15 @@ class Thesis(models.Model):
         ('ETC', 'nach Absprache')
     )
 
+    COURSE_CHOICES = (
+        ('INFO', 'Informatik'),
+        ('BIOINF', 'Bioinformatik'),
+        ('MEINF', 'Medieninformatik'),
+        ('MDZINF', 'Medizininformatik'),
+        ('KOGNI', 'Kognitionswissenschaft'),
+
+    )
+
     title = models.CharField('Titel der Arbeit',
                              blank=False,
                              max_length=200)
@@ -108,7 +117,13 @@ class Thesis(models.Model):
 
     type = MultiSelectField('Art der Arbeit',
                             choices=THESIS_CHOICES,
+                            default=THESIS_CHOICES[-1][0],  # ETC
                             blank=False)
+
+    courses = MultiSelectField('geeignete Studiengänge',
+                               choices=COURSE_CHOICES,
+                               default=COURSE_CHOICES[0][0],  # INFO
+                               blank=False)
 
     tags = tagulous.models.TagField(get_absolute_url=lambda tag: reverse(
             'by_tag',
