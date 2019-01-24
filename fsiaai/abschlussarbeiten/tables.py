@@ -10,8 +10,9 @@ from django_tables2.utils import A
 
 """
 Here, we declare tables that operate directly on top of our model,
-displaying various columns of the Thesis model. The columns to be displayed are dictated by the Meta class 
-of each table, the QuerySet to be used is selected in the view itself.
+displaying various columns of the Thesis model usind django_tables2. 
+The columns to be displayed are dictated by the Meta class of each table, 
+the QuerySet to be used is selected in the view itself.
 The tables are then renderd in the template via the {% render_table table_name %} command.
 """
 
@@ -34,8 +35,9 @@ class ThesisTable(tables.Table):
     """
     class Meta:
         model = Thesis
-        attrs = {'class': 'table table-responsive thesis'}  # renders css class
+        attrs = {'class': 'table thesis'}  # renders css class
         exclude = ['id', 'contact', 'additional', 'is_active', 'pdf', 'user']
+        empty_text = "Momentan liegen keine passenden Einträge vor."
 
     title = tables.Column(linkify=True)  # works since get_absolute_url() is defined for the Thesis model
     description = TruncatedTextColumn(accessor=A('description'))

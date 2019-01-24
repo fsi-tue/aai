@@ -15,12 +15,14 @@ def index(request):
     messages.info(request, 'Diese Seite befindet sich noch im Aufbau und ist sowieso nur Proof of Concept.')
     return render(request, 'index.html')
 
+
 @login_required
 def detail(request, thesis_id):
     thesis = get_object_or_404(Thesis, pk=thesis_id)
     return render(request, 'detail.html', {
         'thesis': thesis,
     })
+
 
 @login_required
 def allentries(request):
@@ -30,12 +32,14 @@ def allentries(request):
         'allentries': entries
     })
 
+
 @login_required
 def tags(request):
     tagcloud = Thesis.tags.tag_model.objects.weight()
     return render(request, 'tags.html', {
         'tags': tagcloud
     })
+
 
 @login_required
 def by_tag(request, slug):
