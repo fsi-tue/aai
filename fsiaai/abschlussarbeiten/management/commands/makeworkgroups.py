@@ -7,6 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         chairs = {
+            'nicht zugeordnet': 'N/A',
             'Computational Systems Biology of Infection': 'Dräger',
             'Big Data Visual Analytics in den Lebenswissenschaften': 'Krone',
             'Algorithmen der Bioinformatik': 'Huson',
@@ -37,7 +38,6 @@ class Command(BaseCommand):
             'Perception Engineering': 'Kasneci',
             'Neuronale Informationsverarbeitung': 'Wichmann',
             'Computergrafik': 'Lensch',
-            'nicht zugeordnet': 'N/A'
         }
         for key, value in chairs.items():
             Chair(name=key, head=value).save()

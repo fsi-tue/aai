@@ -5,6 +5,9 @@
 {% block toggle_login %}{% endblock %}
 {# <a href="{% url 'saml2_login' %}"><button type="button" class="btn btn-info">Login mit Shibboleth</button></a>  #}
 {% block content %}
+
+    <h4>Um diese Funktion nutzen zu können, loggen Sie sich bitte ein:</h4>
+
     <form action="{% url 'login' %}" method="post" accept-charset="utf-8">
         <table id="loginform">
         {% bootstrap_form form %}

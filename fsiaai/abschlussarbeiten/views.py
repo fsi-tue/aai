@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    messages.info(request, 'Diese Seite befindet sich noch im Aufbau und ist sowieso nur Proof of Concept.')
+    messages.error(request, 'Um die Funktionalität dieser Seite nutzen zu können, loggen Sie sich bitte ein.')
     return render(request, 'index.html')
 
 

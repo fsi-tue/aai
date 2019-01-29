@@ -27,11 +27,11 @@ class AAIUser(AbstractUser):
         A custom user object is needed to process the group attributes
         that we receive through SAML2/Shibboleth.
         """
-    chair = models.OneToOneField(Chair,
-                                 null=True,
-                                 on_delete=models.CASCADE,
-                                 related_name='employed_at',
-                                 verbose_name="Angestellt bei Lehrstuhl")
+    chair = models.ForeignKey(Chair,
+                              null=True,
+                              on_delete=models.CASCADE,
+                              related_name='employed_at',
+                              verbose_name="Angestellt bei Lehrstuhl")
 
     pass
 
